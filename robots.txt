@@ -1,0 +1,20 @@
+User-agent: * 
+Allow: /
+Allow: /home/
+Allow: /about/
+Allow: /archives/
+Allow: /tags/
+Allow: /music/
+Allow: /messagebord/
+Allow: /categories/
+Allow: /_posts/
+
+Disallow: /vendors/
+Disallow: /categories/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+
+Sitemap: https://www.molengsu.com/sitemap.xml
+Sitemap: https://www.molengsu.com/baidusitemap.xml
