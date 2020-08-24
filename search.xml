@@ -22,66 +22,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL中输入中文报错处理</title>
-    <url>/MySQL%E4%B8%AD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="MySQL中输入中文报错处理"><a href="#MySQL中输入中文报错处理" class="headerlink" title="MySQL中输入中文报错处理"></a>MySQL中输入中文报错处理</h1><ol>
-<li><p>安装MySQL的时候如果没有对数据库编码做修改默认数据库编码是latin1，这个编码是不支持中文的，一般情况下我们将数据库的默认编码修改为utf8（俗称万国码）就可以解决不支持中文的问题</p>
-</li>
-<li><p>我们在插入的中文的数据出现报错是基本可以断定就是编码方式的问题导致的。先去确认一下数据库编码</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> ‘%<span class="built_in">char</span>%’;</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184041334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>你可以看到有七条编码但是编码方式都不唯一有Latin有gbk或者utf8，我列出的上图是没问题的，你的如果和上图不一致就是有问题的。<br>你需要做的是将上列除了第四条character_set_filesystem 的编码方式二进制不做修改，将其余的全部改成utf8。</p>
-</li>
-<li><p>找到my.ini MySQL的配置文件，该配置文件在你的mysql安装路径下<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184109891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>基本顺着这条路径就能找到了，或者找到你开始菜单的mysql快捷方式右击选择打开文件所在路径<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184213867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>在路径下你需要找到这个文件my.ini</p>
-</li>
-<li><p>以文本方式打开<br>去找到[client]在下面加上一句代码</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">default-character-<span class="keyword">set</span>=utf8</span><br></pre></td></tr></table></figure>
-<p>再去找到[mysqld]在下面加上一句代码</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">character-<span class="keyword">set</span>-<span class="keyword">server</span> = utf8</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184359728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184428395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>!!!需要注意的是mysql的版本对这两条代码的支持是不一样的，一般5.几以上的版本使用这两条都没问题，低版本的可能不可以。如果保存配置后mysql重启不了，无法打开就说明这两条代码有问题了，你要根据你安装的版本去百度mysql默认编码ini配置代码。</p>
-</li>
-<li><p>将以上两条代码添加好保存后重启mysql服务。<br>右击计算机（此电脑）——管理——服务<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184558870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>找到mysqld右击重启服务，版本不同名称不一定相同，仔细找一下，如果真的不好找也不要紧把电脑重启一下，这样mysql服务自然就重启了。</p>
-</li>
-<li><p>再去打开cmd的mysql控台（修改ini后mysql控台打不开了请看下面第7条）<br>输入</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> ‘%<span class="built_in">char</span>%’;</span><br></pre></td></tr></table></figure>
-<p>检查一下是否都更改过来了。要求123567除了第4条编码都要一致。如果一致现在在去插入一下数据，中文就可以了。<br>如果还有不一致的使用set [这里替换为Variable_name 不加方括号]=utf8;命令就可以将其改成utf8了<br>例如要改第一条命令是</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> character_set_client=utf8；</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改ini文件后mysql启动不了怎么办<br>如果修改完my.ini mysql服务启动不了了，mysql控台打不开了说明在my.ini文件中的配置命令不对，去检查一下，命令无误也可能说明你的版本不支持上述的两条命令，你需要去百度找到相应的命令再修改。<br>在mysql的安装目录下你仔细找一下会有一个mysql.log文件，版本不同也可能名字不同可以看看其他名字.log结尾的，这是mysql的日志，打开里面会有mysql不能启动的报错具体原因可根据mysql日志来调整ini配置。</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简单SQL注入</title>
-    <url>/SQL%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h1><p>  动态页面有时会通过引擎将用户输入的参数按照预设定的规则构造为SQL语句来执行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入web应用程序，改变原有SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采取必要的措施避免用户输入内容改变原有SQL语句的语义。</p>
-<h2 id="SQL注入的危害"><a href="#SQL注入的危害" class="headerlink" title="SQL注入的危害"></a>SQL注入的危害</h2><p>  绕过登录验证：使用万能密码登录网站后台。<br>  获取敏感数据：获取网站管理员账号、密码等。<br>  文件系统操作：列目录，读取、写入文件等。<br>  注册表操作：读取、写入、删除注册表等。<br>  执行系统命令：远程执行命令。</p>
-<h2 id="3种经典的万能密码"><a href="#3种经典的万能密码" class="headerlink" title="3种经典的万能密码"></a>3种经典的万能密码</h2><h3 id="用户名已知"><a href="#用户名已知" class="headerlink" title="用户名已知"></a>用户名已知</h3><p>1.用户名：admin 密码：1’or’1’=’1</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span></span><br></pre></td></tr></table></figure>
-<p>在SQL语句中and执行优先级比or高，上面构造的SQL语句中 用户名为admin and 密码为1的结果为false，1=1的结果为true，通过or运算 false or true结果为true<br>2.<br>用户名：admin’or’1’=’1 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
-<h3 id="用户名未知"><a href="#用户名未知" class="headerlink" title="用户名未知"></a>用户名未知</h3><p>1.用户名：1’or’1’or’1 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
-<h3 id="可用注释符号"><a href="#可用注释符号" class="headerlink" title="可用注释符号"></a>可用注释符号</h3><p>1.用户名：admin’# 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="comment">#'and password='xxx'</span></span><br></pre></td></tr></table></figure>
-<p>2.用户名：’or 1=1# 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">''</span><span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' and password='xxx'</span></span><br></pre></td></tr></table></figure>
-<h2 id="SQL注入漏洞练习环境推荐DVWA"><a href="#SQL注入漏洞练习环境推荐DVWA" class="headerlink" title="SQL注入漏洞练习环境推荐DVWA"></a>SQL注入漏洞练习环境推荐DVWA</h2><p><a href="http://www.dvwa.co.uk" target="_blank" rel="noopener">DVWA(Damn Vulnerable Web Application)</a>一个用来进行安全脆弱性鉴定的PHP/MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。<br>DVWA 一共包含了十个攻击模块，分别是：Brute Force（暴力（破解））、Command Injection（命令行注入）、CSRF（跨站请求伪造）、- File Inclusion（文件包含）、File Upload（文件上传）、Insecure CAPTCHA （不安全的验证码）、SQL Injection（SQL注入）、SQL  Injection（Blind）（SQL盲注）、XSS（Reflected）（反射型跨站脚本）、XSS（Stored）（存储型跨站脚本）。包含了 OWASP TOP10 的所有攻击漏洞的练习环境，一站式解决所有 Web 渗透的学习环境。<br>安装步骤：<br>1.下载安装包<br><img src= "/img/loading.gif" data-src="1.png" alt=""><br>2.解压安装包配置数据库<br> 将压缩包文件解压PHP服务器环境www目录下，打开dvwa/config/config.inc.php配置数据库<br> <img src= "/img/loading.gif" data-src="2.png" alt=""><br>3.访问127.0.0.1/dvwa/setup.php安装程序<br>  创建数据库<br>  <img src= "/img/loading.gif" data-src="3.png" alt=""><br>4.安装成功进入<br>默认账户admin密码password</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MISC杂项入门</title>
     <url>/MISC%E6%9D%82%E9%A1%B9%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="MISC杂项入门"><a href="#MISC杂项入门" class="headerlink" title="MISC杂项入门"></a>MISC杂项入门</h1><h2 id="0x01-文件操作"><a href="#0x01-文件操作" class="headerlink" title="0x01 文件操作"></a>0x01 文件操作</h2><h3 id="1-file命令-适用于不知道后缀名"><a href="#1-file命令-适用于不知道后缀名" class="headerlink" title="1.file命令:适用于不知道后缀名"></a>1.file命令:适用于不知道后缀名</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file filename</span><br></pre></td></tr></table></figure>
@@ -179,60 +119,87 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客从搭建到部署（一）</title>
-    <url>/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8E%E6%90%AD%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="hexo博客从搭建到部署（GitHub、coding、阿里云）"><a href="#hexo博客从搭建到部署（GitHub、coding、阿里云）" class="headerlink" title="hexo博客从搭建到部署（GitHub、coding、阿里云）"></a>hexo博客从搭建到部署（GitHub、coding、阿里云）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>进来看文章的我就已经默认你已经了解了hexo了，对hexo过多的介绍不在赘述。前段时间脑门一热，突然想搞一个自己的博客，短暂的初步了解选定了hexo框架。自己踩了一堆坑，从生疏到对hexo完全熟悉逐步的把hexo搭建了起来。我写本文的目的想通过本文给那些想要使用hexo的新人指明一个方向，避免少走弯路。希望通过我的教程你能顺利的实现自己的hexo博客。</p>
-<p>本文分为多个部分：</p>
-<p>第一部分：本地环境安装以及博客安装实现本地浏览</p>
-<p>第二部分：<a href="https://www.molengsu.com/hexo博客从搭建到部署（二）/">部署博客到GitHub</a></p>
-<p>第三部分：<a href="https://www.molengsu.com/hexo博客从搭建到部署（三）/">部署博客到coding</a></p>
-<p>第四部分：部署博客到阿里云服务器</p>
-<h2 id="这是第一部分：本地环境安装以及博客本地搭建"><a href="#这是第一部分：本地环境安装以及博客本地搭建" class="headerlink" title="这是第一部分：本地环境安装以及博客本地搭建"></a>这是第一部分：本地环境安装以及博客本地搭建</h2><h1 id="一、安装环境软件"><a href="#一、安装环境软件" class="headerlink" title="一、安装环境软件"></a>一、安装环境软件</h1><p>需要用到的环境：node.js 、git</p>
-<p>我是本地win10 下node.js+git环境</p>
-<p>关于node.js和Git的安装没什么好说的和其他软件安装一样，下一步下一步就可以了。这里给出软件下载地址</p>
-<p><a href="http://nodejs.cn/download/" target="_blank" rel="noopener">node.js</a>      <a href="https://git-scm.com/download/" target="_blank" rel="noopener"> git</a></p>
-<p>安装完成验证,打开cmd</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p><img src= "/img/loading.gif" data-src="1.png" alt=""></p>
-<p>这时在桌面右键鼠标就会出现Git GUI here和Git bash here的选项</p>
-<p><img src= "/img/loading.gif" data-src="2.png" alt=""></p>
-<p>至此我们的本地环境准备工作已经做好了</p>
-<h1 id="二、安装hexo"><a href="#二、安装hexo" class="headerlink" title="二、安装hexo"></a>二、安装hexo</h1><p>我们找一个位置作为根目录，例如在G盘新建一个hexo文件夹 G:\hexo 进入文件夹内在空白处右键选择Git bash here打开git终端</p>
-<p><img src= "/img/loading.gif" data-src="3.png" alt=""></p>
-<p>执行安装命令开始安装hexo</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cil</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>初始化</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init myblog    //myblog文件夹名你可以自己随便取</span><br><span class="line"><span class="built_in">cd</span> myblog    //进入myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>新建完成后文件中出现以下目录和文件</p>
-<p><img src= "/img/loading.gif" data-src="4.png" alt=""></p>
-<ul>
-<li>node_modules: 依赖包</li>
-<li>public：存放生成的页面</li>
-<li>scaffolds：生成文章的一些模板</li>
-<li>source：源文件</li>
-<li>themes：主题存放位置</li>
-<li>_config.yml: 博客的配置文件</li>
-</ul>
-<p>执行命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g       //生成静态页面</span><br><span class="line">hexo server       //启动hexo服务器</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>在地址栏输入localhost:4000或127.0.0.1:4000就可以看到初始状态的博客页面了</p>
-<h1 id="三、关于主题的更换"><a href="#三、关于主题的更换" class="headerlink" title="三、关于主题的更换"></a>三、关于主题的更换</h1><p>每个人喜欢的风格不一，你们可以自己去百度自己去挑，比如<a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">next</a>、<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>、<a href="https://github.com/WongMinHo/hexo-theme-miho" target="_blank" rel="noopener">butterfly</a>主题都不错，我用的是butterfly</p>
-<p>这些主题一般都是在GitHub上的，选好主题后我们可以将其打包下载下来解压到我们的themes文件夹中或者使用命令直接从GitHub克隆到本地，详细的主题安装命令在你找到的主题说明文档下方都会有，这里拿next主题举例</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br><span class="line">//git <span class="built_in">clone</span> +主题地址+路径</span><br></pre></td></tr></table></figure>
-
-<p>修改_config.yml配置文件，找到theme: 项将其后面的参数改为你主题目录名，比如你下载了butterfly主题放在themes的butterfly文件夹中那么参数应设为theme： butterfly。注意分号后面需要有一个空格。安装完后重新启动一下hexo就可以看到了。注意，有些主题需要安装依赖不然会有一些错误无法正常访问，你选主题的时候自己详细看一下关于主题的说明文档，需要安装的依赖文档中都会介绍详细的安装方法。</p>
-<p>关于主题的优化我不在详细介绍了，因为本文的主要目的还是教你如何将你的hexo博客发布到公网，在加上每个人所选用的主题不一，各主题的优化方式也有差别，所以我不在详细介绍，你可以根据你自己所选的主题去做一些详细的优化，直到达到你满意的状态后再回到这篇文章继续学习如何部署。或者你跟着文章继续学习部署，后期慢慢进行你的主题优化，因为一般主题的优化是一个漫长的过程，你不可能一下达到满意的状态，后期你看到喜欢的小玩意都可以单独的再去加上，并不会对部署更新有任何影响，hexo的优化是灵活的。</p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>first blog</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>博客搭建</tag>
+        <tag>hello word</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单SQL注入</title>
+    <url>/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h1><p>  动态页面有时会通过引擎将用户输入的参数按照预设定的规则构造为SQL语句来执行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入web应用程序，改变原有SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采取必要的措施避免用户输入内容改变原有SQL语句的语义。</p>
+<h2 id="SQL注入的危害"><a href="#SQL注入的危害" class="headerlink" title="SQL注入的危害"></a>SQL注入的危害</h2><p>  绕过登录验证：使用万能密码登录网站后台。<br>  获取敏感数据：获取网站管理员账号、密码等。<br>  文件系统操作：列目录，读取、写入文件等。<br>  注册表操作：读取、写入、删除注册表等。<br>  执行系统命令：远程执行命令。</p>
+<h2 id="3种经典的万能密码"><a href="#3种经典的万能密码" class="headerlink" title="3种经典的万能密码"></a>3种经典的万能密码</h2><h3 id="用户名已知"><a href="#用户名已知" class="headerlink" title="用户名已知"></a>用户名已知</h3><p>1.用户名：admin 密码：1’or’1’=’1</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span></span><br></pre></td></tr></table></figure>
+<p>在SQL语句中and执行优先级比or高，上面构造的SQL语句中 用户名为admin and 密码为1的结果为false，1=1的结果为true，通过or运算 false or true结果为true<br>2.<br>用户名：admin’or’1’=’1 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+<h3 id="用户名未知"><a href="#用户名未知" class="headerlink" title="用户名未知"></a>用户名未知</h3><p>1.用户名：1’or’1’or’1 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+<h3 id="可用注释符号"><a href="#可用注释符号" class="headerlink" title="可用注释符号"></a>可用注释符号</h3><p>1.用户名：admin’# 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="comment">#'and password='xxx'</span></span><br></pre></td></tr></table></figure>
+<p>2.用户名：’or 1=1# 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">''</span><span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' and password='xxx'</span></span><br></pre></td></tr></table></figure>
+<h2 id="SQL注入漏洞练习环境推荐DVWA"><a href="#SQL注入漏洞练习环境推荐DVWA" class="headerlink" title="SQL注入漏洞练习环境推荐DVWA"></a>SQL注入漏洞练习环境推荐DVWA</h2><p><a href="http://www.dvwa.co.uk" target="_blank" rel="noopener">DVWA(Damn Vulnerable Web Application)</a>一个用来进行安全脆弱性鉴定的PHP/MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。<br>DVWA 一共包含了十个攻击模块，分别是：Brute Force（暴力（破解））、Command Injection（命令行注入）、CSRF（跨站请求伪造）、- File Inclusion（文件包含）、File Upload（文件上传）、Insecure CAPTCHA （不安全的验证码）、SQL Injection（SQL注入）、SQL  Injection（Blind）（SQL盲注）、XSS（Reflected）（反射型跨站脚本）、XSS（Stored）（存储型跨站脚本）。包含了 OWASP TOP10 的所有攻击漏洞的练习环境，一站式解决所有 Web 渗透的学习环境。<br>安装步骤：<br>1.下载安装包<br><img src= "/img/loading.gif" data-src="1.png" alt=""><br>2.解压安装包配置数据库<br> 将压缩包文件解压PHP服务器环境www目录下，打开dvwa/config/config.inc.php配置数据库<br> <img src= "/img/loading.gif" data-src="2.png" alt=""><br>3.访问127.0.0.1/dvwa/setup.php安装程序<br>  创建数据库<br>  <img src= "/img/loading.gif" data-src="3.png" alt=""><br>4.安装成功进入<br>默认账户admin密码password</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL中输入中文报错处理</title>
+    <url>/MySQL%E4%B8%AD%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="MySQL中输入中文报错处理"><a href="#MySQL中输入中文报错处理" class="headerlink" title="MySQL中输入中文报错处理"></a>MySQL中输入中文报错处理</h1><ol>
+<li><p>安装MySQL的时候如果没有对数据库编码做修改默认数据库编码是latin1，这个编码是不支持中文的，一般情况下我们将数据库的默认编码修改为utf8（俗称万国码）就可以解决不支持中文的问题</p>
+</li>
+<li><p>我们在插入的中文的数据出现报错是基本可以断定就是编码方式的问题导致的。先去确认一下数据库编码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> ‘%<span class="built_in">char</span>%’;</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184041334.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>你可以看到有七条编码但是编码方式都不唯一有Latin有gbk或者utf8，我列出的上图是没问题的，你的如果和上图不一致就是有问题的。<br>你需要做的是将上列除了第四条character_set_filesystem 的编码方式二进制不做修改，将其余的全部改成utf8。</p>
+</li>
+<li><p>找到my.ini MySQL的配置文件，该配置文件在你的mysql安装路径下<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184109891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>基本顺着这条路径就能找到了，或者找到你开始菜单的mysql快捷方式右击选择打开文件所在路径<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184213867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>在路径下你需要找到这个文件my.ini</p>
+</li>
+<li><p>以文本方式打开<br>去找到[client]在下面加上一句代码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">default-character-<span class="keyword">set</span>=utf8</span><br></pre></td></tr></table></figure>
+<p>再去找到[mysqld]在下面加上一句代码</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">character-<span class="keyword">set</span>-<span class="keyword">server</span> = utf8</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184359728.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184428395.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>!!!需要注意的是mysql的版本对这两条代码的支持是不一样的，一般5.几以上的版本使用这两条都没问题，低版本的可能不可以。如果保存配置后mysql重启不了，无法打开就说明这两条代码有问题了，你要根据你安装的版本去百度mysql默认编码ini配置代码。</p>
+</li>
+<li><p>将以上两条代码添加好保存后重启mysql服务。<br>右击计算机（此电脑）——管理——服务<br><img src= "/img/loading.gif" data-src="https://img-blog.csdnimg.cn/20200326184558870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5NTkyODY5,size_16,color_FFFFFF,t_70" alt=""><br>找到mysqld右击重启服务，版本不同名称不一定相同，仔细找一下，如果真的不好找也不要紧把电脑重启一下，这样mysql服务自然就重启了。</p>
+</li>
+<li><p>再去打开cmd的mysql控台（修改ini后mysql控台打不开了请看下面第7条）<br>输入</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> ‘%<span class="built_in">char</span>%’;</span><br></pre></td></tr></table></figure>
+<p>检查一下是否都更改过来了。要求123567除了第4条编码都要一致。如果一致现在在去插入一下数据，中文就可以了。<br>如果还有不一致的使用set [这里替换为Variable_name 不加方括号]=utf8;命令就可以将其改成utf8了<br>例如要改第一条命令是</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> character_set_client=utf8；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改ini文件后mysql启动不了怎么办<br>如果修改完my.ini mysql服务启动不了了，mysql控台打不开了说明在my.ini文件中的配置命令不对，去检查一下，命令无误也可能说明你的版本不支持上述的两条命令，你需要去百度找到相应的命令再修改。<br>在mysql的安装目录下你仔细找一下会有一个mysql.log文件，版本不同也可能名字不同可以看看其他名字.log结尾的，这是mysql的日志，打开里面会有mysql不能启动的报错具体原因可根据mysql日志来调整ini配置。</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -302,27 +269,60 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+    <title>hexo博客从搭建到部署（一）</title>
+    <url>/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8E%E6%90%AD%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="hexo博客从搭建到部署（GitHub、coding、阿里云）"><a href="#hexo博客从搭建到部署（GitHub、coding、阿里云）" class="headerlink" title="hexo博客从搭建到部署（GitHub、coding、阿里云）"></a>hexo博客从搭建到部署（GitHub、coding、阿里云）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>进来看文章的我就已经默认你已经了解了hexo了，对hexo过多的介绍不在赘述。前段时间脑门一热，突然想搞一个自己的博客，短暂的初步了解选定了hexo框架。自己踩了一堆坑，从生疏到对hexo完全熟悉逐步的把hexo搭建了起来。我写本文的目的想通过本文给那些想要使用hexo的新人指明一个方向，避免少走弯路。希望通过我的教程你能顺利的实现自己的hexo博客。</p>
+<p>本文分为多个部分：</p>
+<p>第一部分：本地环境安装以及博客安装实现本地浏览</p>
+<p>第二部分：<a href="https://www.molengsu.com/hexo博客从搭建到部署（二）/">部署博客到GitHub</a></p>
+<p>第三部分：<a href="https://www.molengsu.com/hexo博客从搭建到部署（三）/">部署博客到coding</a></p>
+<p>第四部分：部署博客到阿里云服务器</p>
+<h2 id="这是第一部分：本地环境安装以及博客本地搭建"><a href="#这是第一部分：本地环境安装以及博客本地搭建" class="headerlink" title="这是第一部分：本地环境安装以及博客本地搭建"></a>这是第一部分：本地环境安装以及博客本地搭建</h2><h1 id="一、安装环境软件"><a href="#一、安装环境软件" class="headerlink" title="一、安装环境软件"></a>一、安装环境软件</h1><p>需要用到的环境：node.js 、git</p>
+<p>我是本地win10 下node.js+git环境</p>
+<p>关于node.js和Git的安装没什么好说的和其他软件安装一样，下一步下一步就可以了。这里给出软件下载地址</p>
+<p><a href="http://nodejs.cn/download/" target="_blank" rel="noopener">node.js</a>      <a href="https://git-scm.com/download/" target="_blank" rel="noopener"> git</a></p>
+<p>安装完成验证,打开cmd</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="1.png" alt=""></p>
+<p>这时在桌面右键鼠标就会出现Git GUI here和Git bash here的选项</p>
+<p><img src= "/img/loading.gif" data-src="2.png" alt=""></p>
+<p>至此我们的本地环境准备工作已经做好了</p>
+<h1 id="二、安装hexo"><a href="#二、安装hexo" class="headerlink" title="二、安装hexo"></a>二、安装hexo</h1><p>我们找一个位置作为根目录，例如在G盘新建一个hexo文件夹 G:\hexo 进入文件夹内在空白处右键选择Git bash here打开git终端</p>
+<p><img src= "/img/loading.gif" data-src="3.png" alt=""></p>
+<p>执行安装命令开始安装hexo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cil</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>初始化</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init myblog    //myblog文件夹名你可以自己随便取</span><br><span class="line"><span class="built_in">cd</span> myblog    //进入myblog文件夹</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>新建完成后文件中出现以下目录和文件</p>
+<p><img src= "/img/loading.gif" data-src="4.png" alt=""></p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：源文件</li>
+<li>themes：主题存放位置</li>
+<li>_config.yml: 博客的配置文件</li>
+</ul>
+<p>执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g       //生成静态页面</span><br><span class="line">hexo server       //启动hexo服务器</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>在地址栏输入localhost:4000或127.0.0.1:4000就可以看到初始状态的博客页面了</p>
+<h1 id="三、关于主题的更换"><a href="#三、关于主题的更换" class="headerlink" title="三、关于主题的更换"></a>三、关于主题的更换</h1><p>每个人喜欢的风格不一，你们可以自己去百度自己去挑，比如<a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">next</a>、<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>、<a href="https://github.com/WongMinHo/hexo-theme-miho" target="_blank" rel="noopener">butterfly</a>主题都不错，我用的是butterfly</p>
+<p>这些主题一般都是在GitHub上的，选好主题后我们可以将其打包下载下来解压到我们的themes文件夹中或者使用命令直接从GitHub克隆到本地，详细的主题安装命令在你找到的主题说明文档下方都会有，这里拿next主题举例</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br><span class="line">//git <span class="built_in">clone</span> +主题地址+路径</span><br></pre></td></tr></table></figure>
+
+<p>修改_config.yml配置文件，找到theme: 项将其后面的参数改为你主题目录名，比如你下载了butterfly主题放在themes的butterfly文件夹中那么参数应设为theme： butterfly。注意分号后面需要有一个空格。安装完后重新启动一下hexo就可以看到了。注意，有些主题需要安装依赖不然会有一些错误无法正常访问，你选主题的时候自己详细看一下关于主题的说明文档，需要安装的依赖文档中都会介绍详细的安装方法。</p>
+<p>关于主题的优化我不在详细介绍了，因为本文的主要目的还是教你如何将你的hexo博客发布到公网，在加上每个人所选用的主题不一，各主题的优化方式也有差别，所以我不在详细介绍，你可以根据你自己所选的主题去做一些详细的优化，直到达到你满意的状态后再回到这篇文章继续学习如何部署。或者你跟着文章继续学习部署，后期慢慢进行你的主题优化，因为一般主题的优化是一个漫长的过程，你不可能一下达到满意的状态，后期你看到喜欢的小玩意都可以单独的再去加上，并不会对部署更新有任何影响，hexo的优化是灵活的。</p>
 ]]></content>
       <categories>
-        <category>first blog</category>
+        <category>hexo</category>
       </categories>
       <tags>
-        <tag>hello word</tag>
+        <tag>hexo</tag>
+        <tag>博客搭建</tag>
       </tags>
   </entry>
   <entry>
