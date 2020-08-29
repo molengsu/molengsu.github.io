@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.molengsu.com/VMware%E5%AE%89%E8%A3%85kali%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E7%89%88/</loc>
+    <loc>https://www.molengsu.com/win10%E5%AE%89%E8%A3%85Linux%E5%AD%90%E7%B3%BB%E7%BB%9F/</loc>
     
     <lastmod>2020-08-29</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.molengsu.com/win10%E5%AE%89%E8%A3%85Linux%E5%AD%90%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>https://www.molengsu.com/VMware%E5%AE%89%E8%A3%85kali%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E7%89%88/</loc>
     
     <lastmod>2020-08-29</lastmod>
     
@@ -158,6 +158,13 @@
   </url>
   
   <url>
+    <loc>https://www.molengsu.com/tags/hello-word/</loc>
+    <lastmod>2020-08-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.molengsu.com/tags/hexo/</loc>
     <lastmod>2020-08-29</lastmod>
     <changefreq>daily</changefreq>
@@ -166,13 +173,6 @@
   
   <url>
     <loc>https://www.molengsu.com/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2020-08-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.molengsu.com/tags/hello-word/</loc>
     <lastmod>2020-08-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -188,14 +188,7 @@
   </url>
   
   <url>
-    <loc>https://www.molengsu.com/categories/%E9%9A%8F%E7%AC%94/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2020-08-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.molengsu.com/categories/hexo/</loc>
+    <loc>https://www.molengsu.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2020-08-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -203,6 +196,13 @@
   
   <url>
     <loc>https://www.molengsu.com/categories/first-blog/</loc>
+    <lastmod>2020-08-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.molengsu.com/categories/hexo/</loc>
     <lastmod>2020-08-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
