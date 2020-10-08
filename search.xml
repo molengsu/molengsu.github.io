@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CRYPTO密码学入门</title>
-    <url>/CRYPTO%E5%AF%86%E7%A0%81%E5%AD%A6%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="0x01密码学概述"><a href="#0x01密码学概述" class="headerlink" title="0x01密码学概述"></a>0x01密码学概述</h1><p>  第一阶段从古代到19实际末——古典密码<br>  第二阶段从20实际初到1949年——近代密码<br>  第三阶段从C.E.Shannon (香浓)于1949年发表的划时代论文”The Communication Theory of Secret Systems”开始——现代密码<br>  第四阶段从1976年W.Diffie和M.Hellman创造性地发表了论文”New Directions in Cryptography”开始——公钥密码</p>
-<h2 id="密码编码学"><a href="#密码编码学" class="headerlink" title="密码编码学"></a>密码编码学</h2><p>  密码编码学是密码学的一个分支，研究与信息安全有关的数学技术。<br>  密码编码学是包含数据变换的原理、工具和方法的一门学科，这种数据变换的目的是为了隐蔽数据的信息内容，阻止对数据的篡改以及防止未经认可使用数据<br>  密码编码学是论述使明文变得不可懂的密文，以及把已加密的消息变换成可懂的形式的艺术和技巧 </p>
-<h2 id="对称加密不对称加密"><a href="#对称加密不对称加密" class="headerlink" title="对称加密不对称加密"></a>对称加密不对称加密</h2><p>  对称加密算法：加密密钥和解密密钥相同，或实质上相同，从一个易与推出另一个。又称传统密码算法、秘密密钥算法或单密钥算法<br>  DES、3DES、IDEA、AES<br>  非对称密码算法：加密密钥和解密密钥不同，从一个很难推出另一个。又叫公钥密码算法，其中的加密密钥可以公开，称为公开密钥，简称公钥，机密密钥必须保密，称为私人密钥，简称私钥<br>  RSA、ECC、EIGamal</p>
-<h1 id="0x02常见编码"><a href="#0x02常见编码" class="headerlink" title="0x02常见编码"></a>0x02常见编码</h1><h2 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h2><p>  使用7位或8位二进制数组合表示128或256种可能的字符。<br>  <img src= "/img/loading.gif" data-src="2.png" alt=""><br>  <img src= "/img/loading.gif" data-src="3.png" alt=""></p>
-<h2 id="base-64"><a href="#base-64" class="headerlink" title="base 64"></a>base 64</h2><p>  特点：密文以=或==结尾，数据多为26个英文字母大小写0-9字符组合<br>  Base64的索引表，字符选用了”A-Z、a-z、0-9、+、/“ 64个可打印字符，这是标准的Base64协议规定。<br>  第一步，将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。<br>  第二步，将上面的24个二进制位每6个一组，共分为4组。<br>  <img src= "/img/loading.gif" data-src="4.jpg" alt=""><br>  第三步，在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。<br>  第四步，根据Base64编码对照表获得对应的值。<br>  <img src= "/img/loading.gif" data-src="6.png" alt=""><br>  位数不足的情况：<br>  两个字节：两个字节共16个二进制位，依旧按照规则进行分组。此时总共16个二进制位，每6个一组，则第三组缺少2位，用0补齐，得到三个Base64编码，第四组完全没有数据则用“=”补上。因此，上图中“BC”转换之后为“QKM=”；<br>  一个字节：一个字节共8个二进制位，依旧按照规则进行分组。此时共8个二进制位，每6个一组，则第二组缺少4位，用0补齐，得到两个Base64编码，而后面两组没有对应数据，都用“=”补上。因此，下图中“A”转换之后为“QQ==”<br>  <img src= "/img/loading.gif" data-src="5.png" alt=""></p>
-<h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><p>  特点：密文中有多个%号符<br>  URL编码是一个字符ASCII码的十六进制基础上稍微变动，需要在前面加上“%”。比如\的ASCII码是92，十六进制为5c，所以\的URL编码就是%5c</p>
-<h2 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h2><p>  特点：密文中有多个\uxxxx<br>  Unicode码扩展自ASCII字元集。在严格的ASCII中，每个字元用7位元表示，或者电脑上普遍使用的每字元有8位宽，而Unicode使用全16位元字元集。这使得Unicode能表示世界上所有的书写语言中可能用于电脑通讯的字元、形象文字和其他符号。</p>
-<h2 id="js混淆"><a href="#js混淆" class="headerlink" title="js混淆"></a>js混淆</h2><p>  特点：密文中有多个\xaa十六进制数<br>  混淆：经过编码将变量和函数原命名改为毫无意义的命名（如function(a,b,c,e,g)等），以防止他人窥视和窃取 Javascript 源代码，也有一定压缩效果。混淆是故意制造混淆代码的行为，即让人难以理解的源代码或机器码。它类似于加密，但机器能够理解代码并能够执行它。<br>  加密：一般用eval方法加密，效果与混淆相似，也做到了压缩的效果。</p>
-<h1 id="0x03常见加密算法"><a href="#0x03常见加密算法" class="headerlink" title="0x03常见加密算法"></a>0x03常见加密算法</h1><p><a href="https://blog.csdn.net/baidu_22254181/article/details/82594072" target="_blank" rel="noopener">常见的7总加密算法</a></p>
-<h1 id="0x04摘要算法"><a href="#0x04摘要算法" class="headerlink" title="0x04摘要算法"></a>0x04摘要算法</h1><p>  通过对所有数据提取指纹信息以实现数据签名、数据完整性校验等功能，由于其不可逆性，有时候会被用作敏感信息的加密。数据摘要算法也被称为哈希（Hash）算法、散列算法、常见的摘要算法有MD5和SHA</p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MISC杂项入门</title>
     <url>/MISC%E6%9D%82%E9%A1%B9%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="MISC杂项入门"><a href="#MISC杂项入门" class="headerlink" title="MISC杂项入门"></a>MISC杂项入门</h1><h2 id="0x01-文件操作"><a href="#0x01-文件操作" class="headerlink" title="0x01 文件操作"></a>0x01 文件操作</h2><h3 id="1-file命令-适用于不知道后缀名"><a href="#1-file命令-适用于不知道后缀名" class="headerlink" title="1.file命令:适用于不知道后缀名"></a>1.file命令:适用于不知道后缀名</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file filename</span><br></pre></td></tr></table></figure>
@@ -119,61 +98,18 @@
       </tags>
   </entry>
   <entry>
-    <title>VMware安装kali设置中文版</title>
-    <url>/VMware%E5%AE%89%E8%A3%85kali%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E7%89%88/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h2 id="下载kali免安装文件"><a href="#下载kali免安装文件" class="headerlink" title="下载kali免安装文件"></a>下载kali免安装文件</h2><p>到<a href="https://www.kali.org/downloads/" target="_blank" rel="noopener">kali官网</a>下载VMware免安装版<br><img src= "/img/loading.gif" data-src="0.png" alt=""></p>
-<h2 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h2><p>将下载好的.7z压缩包文件放到虚拟机目录中解压出来<br><img src= "/img/loading.gif" data-src="1.png" alt=""></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>运行vmware,选择“文件——打开”<br><img src= "/img/loading.gif" data-src="2.png" alt=""><br>选择刚才解压的文件路径找到.vmx文件打开<br><img src= "/img/loading.gif" data-src="3.png" alt=""></p>
-<h2 id="WM设置"><a href="#WM设置" class="headerlink" title="WM设置"></a>WM设置</h2><p>打开后，在描述中的内容为kali信息（用户名和密码），选择编辑虚拟机设置<br><img src= "/img/loading.gif" data-src="4.png" alt=""><br>将网络适配器设为NAT模式，内存、处理器根据自己电脑的配置分配<br><img src= "/img/loading.gif" data-src="5.png" alt=""><br>选项设置，将客户机操作系统设为Linux–Ubuntu<br><img src= "/img/loading.gif" data-src="20.png" alt=""></p>
-<h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h2><p>弹出提示框选择我已复制<br><img src= "/img/loading.gif" data-src="6.png" alt=""><br>进入系统输入用户名kali密码kali(下载的不同版本用户名密码略有不同注意查看未启动界面的kali信息描述)<br><img src= "/img/loading.gif" data-src="7.png" alt=""><br>登录成功后查看右上角网络图标是否显示正常，打开命令终端ping一下百度地址测试一下是否联网<br><img src= "/img/loading.gif" data-src="8.png" alt=""><br>测试失败，先检查物理机是否已联网，逐步排查，<a href="https://blog.csdn.net/play_chess_itmanito/article/details/84557575" target="_blank" rel="noopener">还原一下WMware虚拟网络设置</a></p>
-<h2 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h2><p>打开终端，切换root用户权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-<p>提示输入密码，输入kali(输入时不显示)<br>修改源配置文件,使用vim文本编辑器打开sources.list文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="9.png" alt=""><br>按A键进入编辑模式，将第二行使用#号注释掉，添加一个国内源，下表中任意都可。按Esc键退出编辑模式，输入:wq保存并退出</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="10.png" alt=""><br>附上国内kali源</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"><span class="comment">#163</span></span><br><span class="line">deb http://mirrors.163.com/debian wheezy main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian wheezy main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib</span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br></pre></td></tr></table></figure>
-
-<p>更新源</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="11.png" alt=""></p>
-<h2 id="设置系统为中文"><a href="#设置系统为中文" class="headerlink" title="设置系统为中文"></a>设置系统为中文</h2><p>下载安装中文字体</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install xfonts-intl-chinese ttf-wqy-microhei</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-src="12.png" alt=""><br>设置系统语言区域</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
-<p>输入上面命令打开下图设置界面<br><img src= "/img/loading.gif" data-src="13.png" alt=""><br>使用上下键或鼠标滑轮移动光标，使用空格选中，将[en_US.UTF-8 UTF-8]取消勾选<br><img src= "/img/loading.gif" data-src="13.png" alt=""><br>将 [zh_CN.GBK GBK 和 [zh_CN.UTF_8 UTF_8]选中<br>使用Tab键切换选择OK回车<br><img src= "/img/loading.gif" data-src="14.png" alt=""><br>系统默认语言环境选择zh_CN.UTF-8<br><img src= "/img/loading.gif" data-src="15.png" alt=""></p>
-<p>重启kali</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-
-<p>开机后可发现系统登录界面已被汉化，输入用户名密码登录<br><img src= "/img/loading.gif" data-src="17.png" alt=""><br>开机后弹出更新文件夹语言提示框选择保留旧的名称(更新后的中文名称会使路径变成中文，导致安装软件报错)<br><img src= "/img/loading.gif" data-src="18.png" alt=""></p>
-<p>最后查看一下<br><img src= "/img/loading.gif" data-src="19.png" alt=""></p>
-<p>如有需要可以安装中文输入法，附上采坑教程<a href="https://blog.csdn.net/qq_39592869/article/details/105389234" target="_blank" rel="noopener">在kali安装中文输入法</a></p>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>kali</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>简单SQL注入</title>
-    <url>/SQL%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h1><p>  动态页面有时会通过引擎将用户输入的参数按照预设定的规则构造为SQL语句来执行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入web应用程序，改变原有SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采取必要的措施避免用户输入内容改变原有SQL语句的语义。</p>
-<h2 id="SQL注入的危害"><a href="#SQL注入的危害" class="headerlink" title="SQL注入的危害"></a>SQL注入的危害</h2><p>  绕过登录验证：使用万能密码登录网站后台。<br>  获取敏感数据：获取网站管理员账号、密码等。<br>  文件系统操作：列目录，读取、写入文件等。<br>  注册表操作：读取、写入、删除注册表等。<br>  执行系统命令：远程执行命令。</p>
-<h2 id="3种经典的万能密码"><a href="#3种经典的万能密码" class="headerlink" title="3种经典的万能密码"></a>3种经典的万能密码</h2><h3 id="用户名已知"><a href="#用户名已知" class="headerlink" title="用户名已知"></a>用户名已知</h3><p>1.用户名：admin 密码：1’or’1’=’1</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span></span><br></pre></td></tr></table></figure>
-<p>在SQL语句中and执行优先级比or高，上面构造的SQL语句中 用户名为admin and 密码为1的结果为false，1=1的结果为true，通过or运算 false or true结果为true<br>2.<br>用户名：admin’or’1’=’1 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
-<h3 id="用户名未知"><a href="#用户名未知" class="headerlink" title="用户名未知"></a>用户名未知</h3><p>1.用户名：1’or’1’or’1 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
-<h3 id="可用注释符号"><a href="#可用注释符号" class="headerlink" title="可用注释符号"></a>可用注释符号</h3><p>1.用户名：admin’# 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="comment">#'and password='xxx'</span></span><br></pre></td></tr></table></figure>
-<p>2.用户名：’or 1=1# 密码：随意</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">''</span><span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' and password='xxx'</span></span><br></pre></td></tr></table></figure>
-<h2 id="SQL注入漏洞练习环境推荐DVWA"><a href="#SQL注入漏洞练习环境推荐DVWA" class="headerlink" title="SQL注入漏洞练习环境推荐DVWA"></a>SQL注入漏洞练习环境推荐DVWA</h2><p><a href="http://www.dvwa.co.uk" target="_blank" rel="noopener">DVWA(Damn Vulnerable Web Application)</a>一个用来进行安全脆弱性鉴定的PHP/MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。<br>DVWA 一共包含了十个攻击模块，分别是：Brute Force（暴力（破解））、Command Injection（命令行注入）、CSRF（跨站请求伪造）、- File Inclusion（文件包含）、File Upload（文件上传）、Insecure CAPTCHA （不安全的验证码）、SQL Injection（SQL注入）、SQL  Injection（Blind）（SQL盲注）、XSS（Reflected）（反射型跨站脚本）、XSS（Stored）（存储型跨站脚本）。包含了 OWASP TOP10 的所有攻击漏洞的练习环境，一站式解决所有 Web 渗透的学习环境。<br>安装步骤：<br>1.下载安装包<br><img src= "/img/loading.gif" data-src="1.png" alt=""><br>2.解压安装包配置数据库<br> 将压缩包文件解压PHP服务器环境www目录下，打开dvwa/config/config.inc.php配置数据库<br> <img src= "/img/loading.gif" data-src="2.png" alt=""><br>3.访问127.0.0.1/dvwa/setup.php安装程序<br>  创建数据库<br>  <img src= "/img/loading.gif" data-src="3.png" alt=""><br>4.安装成功进入<br>默认账户admin密码password</p>
+    <title>CRYPTO密码学入门</title>
+    <url>/CRYPTO%E5%AF%86%E7%A0%81%E5%AD%A6%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="0x01密码学概述"><a href="#0x01密码学概述" class="headerlink" title="0x01密码学概述"></a>0x01密码学概述</h1><p>  第一阶段从古代到19实际末——古典密码<br>  第二阶段从20实际初到1949年——近代密码<br>  第三阶段从C.E.Shannon (香浓)于1949年发表的划时代论文”The Communication Theory of Secret Systems”开始——现代密码<br>  第四阶段从1976年W.Diffie和M.Hellman创造性地发表了论文”New Directions in Cryptography”开始——公钥密码</p>
+<h2 id="密码编码学"><a href="#密码编码学" class="headerlink" title="密码编码学"></a>密码编码学</h2><p>  密码编码学是密码学的一个分支，研究与信息安全有关的数学技术。<br>  密码编码学是包含数据变换的原理、工具和方法的一门学科，这种数据变换的目的是为了隐蔽数据的信息内容，阻止对数据的篡改以及防止未经认可使用数据<br>  密码编码学是论述使明文变得不可懂的密文，以及把已加密的消息变换成可懂的形式的艺术和技巧 </p>
+<h2 id="对称加密不对称加密"><a href="#对称加密不对称加密" class="headerlink" title="对称加密不对称加密"></a>对称加密不对称加密</h2><p>  对称加密算法：加密密钥和解密密钥相同，或实质上相同，从一个易与推出另一个。又称传统密码算法、秘密密钥算法或单密钥算法<br>  DES、3DES、IDEA、AES<br>  非对称密码算法：加密密钥和解密密钥不同，从一个很难推出另一个。又叫公钥密码算法，其中的加密密钥可以公开，称为公开密钥，简称公钥，机密密钥必须保密，称为私人密钥，简称私钥<br>  RSA、ECC、EIGamal</p>
+<h1 id="0x02常见编码"><a href="#0x02常见编码" class="headerlink" title="0x02常见编码"></a>0x02常见编码</h1><h2 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h2><p>  使用7位或8位二进制数组合表示128或256种可能的字符。<br>  <img src= "/img/loading.gif" data-src="2.png" alt=""><br>  <img src= "/img/loading.gif" data-src="3.png" alt=""></p>
+<h2 id="base-64"><a href="#base-64" class="headerlink" title="base 64"></a>base 64</h2><p>  特点：密文以=或==结尾，数据多为26个英文字母大小写0-9字符组合<br>  Base64的索引表，字符选用了”A-Z、a-z、0-9、+、/“ 64个可打印字符，这是标准的Base64协议规定。<br>  第一步，将待转换的字符串每三个字节分为一组，每个字节占8bit，那么共有24个二进制位。<br>  第二步，将上面的24个二进制位每6个一组，共分为4组。<br>  <img src= "/img/loading.gif" data-src="4.jpg" alt=""><br>  第三步，在每组前面添加两个0，每组由6个变为8个二进制位，总共32个二进制位，即四个字节。<br>  第四步，根据Base64编码对照表获得对应的值。<br>  <img src= "/img/loading.gif" data-src="6.png" alt=""><br>  位数不足的情况：<br>  两个字节：两个字节共16个二进制位，依旧按照规则进行分组。此时总共16个二进制位，每6个一组，则第三组缺少2位，用0补齐，得到三个Base64编码，第四组完全没有数据则用“=”补上。因此，上图中“BC”转换之后为“QKM=”；<br>  一个字节：一个字节共8个二进制位，依旧按照规则进行分组。此时共8个二进制位，每6个一组，则第二组缺少4位，用0补齐，得到两个Base64编码，而后面两组没有对应数据，都用“=”补上。因此，下图中“A”转换之后为“QQ==”<br>  <img src= "/img/loading.gif" data-src="5.png" alt=""></p>
+<h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><p>  特点：密文中有多个%号符<br>  URL编码是一个字符ASCII码的十六进制基础上稍微变动，需要在前面加上“%”。比如\的ASCII码是92，十六进制为5c，所以\的URL编码就是%5c</p>
+<h2 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h2><p>  特点：密文中有多个\uxxxx<br>  Unicode码扩展自ASCII字元集。在严格的ASCII中，每个字元用7位元表示，或者电脑上普遍使用的每字元有8位宽，而Unicode使用全16位元字元集。这使得Unicode能表示世界上所有的书写语言中可能用于电脑通讯的字元、形象文字和其他符号。</p>
+<h2 id="js混淆"><a href="#js混淆" class="headerlink" title="js混淆"></a>js混淆</h2><p>  特点：密文中有多个\xaa十六进制数<br>  混淆：经过编码将变量和函数原命名改为毫无意义的命名（如function(a,b,c,e,g)等），以防止他人窥视和窃取 Javascript 源代码，也有一定压缩效果。混淆是故意制造混淆代码的行为，即让人难以理解的源代码或机器码。它类似于加密，但机器能够理解代码并能够执行它。<br>  加密：一般用eval方法加密，效果与混淆相似，也做到了压缩的效果。</p>
+<h1 id="0x03常见加密算法"><a href="#0x03常见加密算法" class="headerlink" title="0x03常见加密算法"></a>0x03常见加密算法</h1><p><a href="https://blog.csdn.net/baidu_22254181/article/details/82594072" target="_blank" rel="noopener">常见的7总加密算法</a></p>
+<h1 id="0x04摘要算法"><a href="#0x04摘要算法" class="headerlink" title="0x04摘要算法"></a>0x04摘要算法</h1><p>  通过对所有数据提取指纹信息以实现数据签名、数据完整性校验等功能，由于其不可逆性，有时候会被用作敏感信息的加密。数据摘要算法也被称为哈希（Hash）算法、散列算法、常见的摘要算法有MD5和SHA</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -242,6 +178,70 @@
       </categories>
       <tags>
         <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单SQL注入</title>
+    <url>/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h1><p>  动态页面有时会通过引擎将用户输入的参数按照预设定的规则构造为SQL语句来执行数据库操作，SQL注入攻击指的是通过构建特殊的输入作为参数传入web应用程序，改变原有SQL语句的语义来执行攻击者所要的操作，其主要原因是程序没有采取必要的措施避免用户输入内容改变原有SQL语句的语义。</p>
+<h2 id="SQL注入的危害"><a href="#SQL注入的危害" class="headerlink" title="SQL注入的危害"></a>SQL注入的危害</h2><p>  绕过登录验证：使用万能密码登录网站后台。<br>  获取敏感数据：获取网站管理员账号、密码等。<br>  文件系统操作：列目录，读取、写入文件等。<br>  注册表操作：读取、写入、删除注册表等。<br>  执行系统命令：远程执行命令。</p>
+<h2 id="3种经典的万能密码"><a href="#3种经典的万能密码" class="headerlink" title="3种经典的万能密码"></a>3种经典的万能密码</h2><h3 id="用户名已知"><a href="#用户名已知" class="headerlink" title="用户名已知"></a>用户名已知</h3><p>1.用户名：admin 密码：1’or’1’=’1</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span></span><br></pre></td></tr></table></figure>
+<p>在SQL语句中and执行优先级比or高，上面构造的SQL语句中 用户名为admin and 密码为1的结果为false，1=1的结果为true，通过or运算 false or true结果为true<br>2.<br>用户名：admin’or’1’=’1 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="keyword">or</span><span class="string">'1'</span>=<span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+<h3 id="用户名未知"><a href="#用户名未知" class="headerlink" title="用户名未知"></a>用户名未知</h3><p>1.用户名：1’or’1’or’1 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span><span class="keyword">or</span><span class="string">'1'</span> <span class="keyword">and</span> <span class="keyword">password</span>=<span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+<h3 id="可用注释符号"><a href="#可用注释符号" class="headerlink" title="可用注释符号"></a>可用注释符号</h3><p>1.用户名：admin’# 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">'admin'</span><span class="comment">#'and password='xxx'</span></span><br></pre></td></tr></table></figure>
+<p>2.用户名：’or 1=1# 密码：随意</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="string">'ad'</span> <span class="keyword">where</span> username=<span class="string">''</span><span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span><span class="comment">#' and password='xxx'</span></span><br></pre></td></tr></table></figure>
+<h2 id="SQL注入漏洞练习环境推荐DVWA"><a href="#SQL注入漏洞练习环境推荐DVWA" class="headerlink" title="SQL注入漏洞练习环境推荐DVWA"></a>SQL注入漏洞练习环境推荐DVWA</h2><p><a href="http://www.dvwa.co.uk" target="_blank" rel="noopener">DVWA(Damn Vulnerable Web Application)</a>一个用来进行安全脆弱性鉴定的PHP/MySQL Web 应用，旨在为安全专业人员测试自己的专业技能和工具提供合法的环境，帮助web开发者更好的理解web应用安全防范的过程。<br>DVWA 一共包含了十个攻击模块，分别是：Brute Force（暴力（破解））、Command Injection（命令行注入）、CSRF（跨站请求伪造）、- File Inclusion（文件包含）、File Upload（文件上传）、Insecure CAPTCHA （不安全的验证码）、SQL Injection（SQL注入）、SQL  Injection（Blind）（SQL盲注）、XSS（Reflected）（反射型跨站脚本）、XSS（Stored）（存储型跨站脚本）。包含了 OWASP TOP10 的所有攻击漏洞的练习环境，一站式解决所有 Web 渗透的学习环境。<br>安装步骤：<br>1.下载安装包<br><img src= "/img/loading.gif" data-src="1.png" alt=""><br>2.解压安装包配置数据库<br> 将压缩包文件解压PHP服务器环境www目录下，打开dvwa/config/config.inc.php配置数据库<br> <img src= "/img/loading.gif" data-src="2.png" alt=""><br>3.访问127.0.0.1/dvwa/setup.php安装程序<br>  创建数据库<br>  <img src= "/img/loading.gif" data-src="3.png" alt=""><br>4.安装成功进入<br>默认账户admin密码password</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VMware安装kali设置中文版</title>
+    <url>/VMware%E5%AE%89%E8%A3%85kali%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E7%89%88/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h2 id="下载kali免安装文件"><a href="#下载kali免安装文件" class="headerlink" title="下载kali免安装文件"></a>下载kali免安装文件</h2><p>到<a href="https://www.kali.org/downloads/" target="_blank" rel="noopener">kali官网</a>下载VMware免安装版<br><img src= "/img/loading.gif" data-src="0.png" alt=""></p>
+<h2 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h2><p>将下载好的.7z压缩包文件放到虚拟机目录中解压出来<br><img src= "/img/loading.gif" data-src="1.png" alt=""></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>运行vmware,选择“文件——打开”<br><img src= "/img/loading.gif" data-src="2.png" alt=""><br>选择刚才解压的文件路径找到.vmx文件打开<br><img src= "/img/loading.gif" data-src="3.png" alt=""></p>
+<h2 id="WM设置"><a href="#WM设置" class="headerlink" title="WM设置"></a>WM设置</h2><p>打开后，在描述中的内容为kali信息（用户名和密码），选择编辑虚拟机设置<br><img src= "/img/loading.gif" data-src="4.png" alt=""><br>将网络适配器设为NAT模式，内存、处理器根据自己电脑的配置分配<br><img src= "/img/loading.gif" data-src="5.png" alt=""><br>选项设置，将客户机操作系统设为Linux–Ubuntu<br><img src= "/img/loading.gif" data-src="20.png" alt=""></p>
+<h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h2><p>弹出提示框选择我已复制<br><img src= "/img/loading.gif" data-src="6.png" alt=""><br>进入系统输入用户名kali密码kali(下载的不同版本用户名密码略有不同注意查看未启动界面的kali信息描述)<br><img src= "/img/loading.gif" data-src="7.png" alt=""><br>登录成功后查看右上角网络图标是否显示正常，打开命令终端ping一下百度地址测试一下是否联网<br><img src= "/img/loading.gif" data-src="8.png" alt=""><br>测试失败，先检查物理机是否已联网，逐步排查，<a href="https://blog.csdn.net/play_chess_itmanito/article/details/84557575" target="_blank" rel="noopener">还原一下WMware虚拟网络设置</a></p>
+<h2 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h2><p>打开终端，切换root用户权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+<p>提示输入密码，输入kali(输入时不显示)<br>修改源配置文件,使用vim文本编辑器打开sources.list文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="9.png" alt=""><br>按A键进入编辑模式，将第二行使用#号注释掉，添加一个国内源，下表中任意都可。按Esc键退出编辑模式，输入:wq保存并退出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">:wq</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="10.png" alt=""><br>附上国内kali源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#中科大</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#阿里云</span></span><br><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="comment">#清华大学</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line">deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free</span><br><span class="line"><span class="comment">#163</span></span><br><span class="line">deb http://mirrors.163.com/debian wheezy main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian wheezy main non-free contrib</span><br><span class="line">deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib</span><br><span class="line"><span class="comment">#东软大学</span></span><br><span class="line">deb http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br><span class="line">deb-src http://mirrors.neusoft.edu.cn/kali kali-rolling/main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p>更新源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="11.png" alt=""></p>
+<h2 id="设置系统为中文"><a href="#设置系统为中文" class="headerlink" title="设置系统为中文"></a>设置系统为中文</h2><p>下载安装中文字体</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install xfonts-intl-chinese ttf-wqy-microhei</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-src="12.png" alt=""><br>设置系统语言区域</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo dpkg-reconfigure locales</span><br></pre></td></tr></table></figure>
+<p>输入上面命令打开下图设置界面<br><img src= "/img/loading.gif" data-src="13.png" alt=""><br>使用上下键或鼠标滑轮移动光标，使用空格选中，将[en_US.UTF-8 UTF-8]取消勾选<br><img src= "/img/loading.gif" data-src="13.png" alt=""><br>将 [zh_CN.GBK GBK 和 [zh_CN.UTF_8 UTF_8]选中<br>使用Tab键切换选择OK回车<br><img src= "/img/loading.gif" data-src="14.png" alt=""><br>系统默认语言环境选择zh_CN.UTF-8<br><img src= "/img/loading.gif" data-src="15.png" alt=""></p>
+<p>重启kali</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p>开机后可发现系统登录界面已被汉化，输入用户名密码登录<br><img src= "/img/loading.gif" data-src="17.png" alt=""><br>开机后弹出更新文件夹语言提示框选择保留旧的名称(更新后的中文名称会使路径变成中文，导致安装软件报错)<br><img src= "/img/loading.gif" data-src="18.png" alt=""></p>
+<p>最后查看一下<br><img src= "/img/loading.gif" data-src="19.png" alt=""></p>
+<p>如有需要可以安装中文输入法，附上采坑教程<a href="https://blog.csdn.net/qq_39592869/article/details/105389234" target="_blank" rel="noopener">在kali安装中文输入法</a></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>kali</tag>
       </tags>
   </entry>
   <entry>
@@ -392,6 +392,59 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo博客从搭建到部署（二）</title>
+    <url>/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8E%E6%90%AD%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="hexo从搭建到部署（二）"><a href="#hexo从搭建到部署（二）" class="headerlink" title="hexo从搭建到部署（二）"></a>hexo从搭建到部署（二）</h1><h2 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h2><h2 id="hexo原理的工作"><a href="#hexo原理的工作" class="headerlink" title="hexo原理的工作"></a>hexo原理的工作</h2><p>下面我们开始介绍如何将你的博客从本地部署到远端的服务器中，说到这里先给大家说一下hexo工作原理，这样能让你更好的理解如何部署而不是只跟着敲命令，敲完功能实现，你还是对你的所做一无所知。</p>
+<p><img src= "/img/loading.gif" data-src="5.png" alt="img"></p>
+<p>简单通俗的说就是我们安装的hexo生成的那一大堆文件其实就是hexo程序，我们访问的页面来自public文件夹中的静态页面，当我们写好文章或者对主题做了一些新的优化后就使用命令将原来的静态文件清除掉在通过程序生成新的，而服务器就是一个仓库，我们只把静态文件推进仓库里就可以了，因为我们访问的就是文件生成的静态页面。所以我们要和服务器建立连接，然后就可以将本地每次更新的文章重新推进服务器去。</p>
+<p>在讲如何将hexo部署到GitHub中之前我先简单的说一下将hexo部署到GitHub中的优缺点，避免你多走弯路，我敢肯定你看完我的介绍你本来计划将hexo部署到GitHub现在有完全没有这种想法了。</p>
+<p>第一：将hexo部署到GitHub不用花费一分钱，甚至不用购买域名，因为根据GitHub仓库名命名规则你的博客范文地址是username.github.io这个域名挺好记的可以让人接受。</p>
+<p>第二：缺点GitHub是国外服务器，访问速度有点慢，我估计没人喜欢卡来卡去的页面，你如果能接受的了的话那我没话说。</p>
+<p>第三：估计你看完这条就放弃将博客部署到GitHub的想法了，GitHub屏蔽了百度SEO爬取，如果你不知道什么是SEO自己去百度一下了解一下，屏蔽了百度SEO爬取就以为的你写的博客是没有办法被百度收录的，也就是说别人无法通过百度搜索在网络上查询到你的博客。</p>
+<p>如果你此时已经放弃了将博客部署在GitHub的想法你可以跳过这部分内容，看下面第三部分将博客部署在coding上。</p>
+<p>一、准备工作</p>
+<p>如果你没有GitHub的账户去注册一个，并绑定邮箱</p>
+<p>点击右上角的加号选择新建一个仓库，仓库名填写自己的用户名。注意！！！仓库名必须填写自己的用户名.github.io否则可能导致无法正常访问</p>
+<p><img src= "/img/loading.gif" data-src="8.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="9.png" alt="img"></p>
+<p>建立ssh连接，先配置Git用户，将下面的用户名和邮箱换成自己的（以下命令都在hexo根目录下使用Git bash命令终端执行就可以了）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"username"</span> </span><br><span class="line">git config --global user.email <span class="string">"username@temp.com"</span></span><br></pre></td></tr></table></figure>
+
+<p>生成公钥，邮箱换成你自己的</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+
+<p>生成公钥后在你的C盘目录下C:\Users\你的用户名.ssh  文件夹下生成id_rsa 和 id_rsa.pub 两个文件,以编辑模式打开id_rsa.pub复制里面的内容</p>
+<p>回到GitHub页面点击右上角的头像选择settings</p>
+<p><img src= "/img/loading.gif" data-src="6.png" alt="img"></p>
+<p><img src= "/img/loading.gif" data-src="7.png" alt="img"><br>按图所示添加一个key,将id_ras.pub中的内容粘贴进去</p>
+<p>测试ssh连接，在Git终端输入下面的命令测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>成功后会出现欢迎提示语</p>
+<p>接下来打开我们打开我们hexo根目录下的配置文件_config.yml定位到deploy（将yourname替换为你的）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这一步是hexo博客的自动化部署配置，指定了部署时要将页面文件发布到哪里去上面的地址就是我们的GitHub仓库</p>
+<p>安装自动化部署插件，到hexo文件根目录下使用Git终端执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p>至此我们的配置完全做好了</p>
+<p>二、部署</p>
+<p>需要用到的几个命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean      //清除缓存静态文件</span><br><span class="line">hexo g          //生成静态文件</span><br><span class="line">hexo d         //将静态页面推到服务器中</span><br></pre></td></tr></table></figure>
+
+<p>我们依次执行完上面的命令后，等待部署完成访问你的<a href="https://yourname.github.io就可以看到你的博客已经被部署在GitHub公网上了。" target="_blank" rel="noopener">https://yourname.github.io就可以看到你的博客已经被部署在GitHub公网上了。</a></p>
+<p>当我们写了新的文章或对页面进行了新优化后，先hexo clean清除本地的静态文件,再hexo g生成新的，最后重新推进服务器覆盖就可以了。</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>博客搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客从搭建到部署（四）</title>
     <url>/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8E%E6%90%AD%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%88%E5%9B%9B%EF%BC%89/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="hexo从搭建到部署（四）"><a href="#hexo从搭建到部署（四）" class="headerlink" title="hexo从搭建到部署（四）"></a>hexo从搭建到部署（四）</h1><h2 id="部署博客到阿里云服务器"><a href="#部署博客到阿里云服务器" class="headerlink" title="部署博客到阿里云服务器"></a>部署博客到阿里云服务器</h2><p>使用阿里云部署自己的博客访问速度快，也能避免像GitHub反SEO爬取的问题，当然花了钱的肯定有花了钱的好处。</p>
@@ -460,59 +513,6 @@
 <p>通过IP地址就可以访问到你的博客了</p>
 <h3 id="四、域名绑定"><a href="#四、域名绑定" class="headerlink" title="四、域名绑定"></a>四、域名绑定</h3><p>这里我不过多的介绍了，不懂的看第三部分coding部署的结尾有写介绍，我们买了域名后通过A记录解析到公网IP就可以了，但是我们的服务器需要备案申请ICP。</p>
 <p>国内的服务器发布网站不通过域名解析是需要备案的，如果绑定了域名通过域名解析需要对服务器进行备案，详细的备案流程在服务器购买的服务商都会有这里不再过多解释。</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>博客搭建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo博客从搭建到部署（二）</title>
-    <url>/hexo%E5%8D%9A%E5%AE%A2%E4%BB%8E%E6%90%AD%E5%BB%BA%E5%88%B0%E9%83%A8%E7%BD%B2%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\css\APlayer.min.css"><script src="\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\js\Meting.min.js"></script><h1 id="hexo从搭建到部署（二）"><a href="#hexo从搭建到部署（二）" class="headerlink" title="hexo从搭建到部署（二）"></a>hexo从搭建到部署（二）</h1><h2 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h2><h2 id="hexo原理的工作"><a href="#hexo原理的工作" class="headerlink" title="hexo原理的工作"></a>hexo原理的工作</h2><p>下面我们开始介绍如何将你的博客从本地部署到远端的服务器中，说到这里先给大家说一下hexo工作原理，这样能让你更好的理解如何部署而不是只跟着敲命令，敲完功能实现，你还是对你的所做一无所知。</p>
-<p><img src= "/img/loading.gif" data-src="5.png" alt="img"></p>
-<p>简单通俗的说就是我们安装的hexo生成的那一大堆文件其实就是hexo程序，我们访问的页面来自public文件夹中的静态页面，当我们写好文章或者对主题做了一些新的优化后就使用命令将原来的静态文件清除掉在通过程序生成新的，而服务器就是一个仓库，我们只把静态文件推进仓库里就可以了，因为我们访问的就是文件生成的静态页面。所以我们要和服务器建立连接，然后就可以将本地每次更新的文章重新推进服务器去。</p>
-<p>在讲如何将hexo部署到GitHub中之前我先简单的说一下将hexo部署到GitHub中的优缺点，避免你多走弯路，我敢肯定你看完我的介绍你本来计划将hexo部署到GitHub现在有完全没有这种想法了。</p>
-<p>第一：将hexo部署到GitHub不用花费一分钱，甚至不用购买域名，因为根据GitHub仓库名命名规则你的博客范文地址是username.github.io这个域名挺好记的可以让人接受。</p>
-<p>第二：缺点GitHub是国外服务器，访问速度有点慢，我估计没人喜欢卡来卡去的页面，你如果能接受的了的话那我没话说。</p>
-<p>第三：估计你看完这条就放弃将博客部署到GitHub的想法了，GitHub屏蔽了百度SEO爬取，如果你不知道什么是SEO自己去百度一下了解一下，屏蔽了百度SEO爬取就以为的你写的博客是没有办法被百度收录的，也就是说别人无法通过百度搜索在网络上查询到你的博客。</p>
-<p>如果你此时已经放弃了将博客部署在GitHub的想法你可以跳过这部分内容，看下面第三部分将博客部署在coding上。</p>
-<p>一、准备工作</p>
-<p>如果你没有GitHub的账户去注册一个，并绑定邮箱</p>
-<p>点击右上角的加号选择新建一个仓库，仓库名填写自己的用户名。注意！！！仓库名必须填写自己的用户名.github.io否则可能导致无法正常访问</p>
-<p><img src= "/img/loading.gif" data-src="8.png" alt="img"></p>
-<p><img src= "/img/loading.gif" data-src="9.png" alt="img"></p>
-<p>建立ssh连接，先配置Git用户，将下面的用户名和邮箱换成自己的（以下命令都在hexo根目录下使用Git bash命令终端执行就可以了）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">"username"</span> </span><br><span class="line">git config --global user.email <span class="string">"username@temp.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>生成公钥，邮箱换成你自己的</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>生成公钥后在你的C盘目录下C:\Users\你的用户名.ssh  文件夹下生成id_rsa 和 id_rsa.pub 两个文件,以编辑模式打开id_rsa.pub复制里面的内容</p>
-<p>回到GitHub页面点击右上角的头像选择settings</p>
-<p><img src= "/img/loading.gif" data-src="6.png" alt="img"></p>
-<p><img src= "/img/loading.gif" data-src="7.png" alt="img"><br>按图所示添加一个key,将id_ras.pub中的内容粘贴进去</p>
-<p>测试ssh连接，在Git终端输入下面的命令测试</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-<p>成功后会出现欢迎提示语</p>
-<p>接下来打开我们打开我们hexo根目录下的配置文件_config.yml定位到deploy（将yourname替换为你的）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>这一步是hexo博客的自动化部署配置，指定了部署时要将页面文件发布到哪里去上面的地址就是我们的GitHub仓库</p>
-<p>安装自动化部署插件，到hexo文件根目录下使用Git终端执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
-
-<p>至此我们的配置完全做好了</p>
-<p>二、部署</p>
-<p>需要用到的几个命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean      //清除缓存静态文件</span><br><span class="line">hexo g          //生成静态文件</span><br><span class="line">hexo d         //将静态页面推到服务器中</span><br></pre></td></tr></table></figure>
-
-<p>我们依次执行完上面的命令后，等待部署完成访问你的<a href="https://yourname.github.io就可以看到你的博客已经被部署在GitHub公网上了。" target="_blank" rel="noopener">https://yourname.github.io就可以看到你的博客已经被部署在GitHub公网上了。</a></p>
-<p>当我们写了新的文章或对页面进行了新优化后，先hexo clean清除本地的静态文件,再hexo g生成新的，最后重新推进服务器覆盖就可以了。</p>
 ]]></content>
       <categories>
         <category>hexo</category>
